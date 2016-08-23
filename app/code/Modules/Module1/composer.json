@@ -1,0 +1,13 @@
+{
+    "name": "Vendor/Module1",
+    "description": "Test module for Magento 2",
+    "type": "magento2-module",
+    "extra": {
+        "map": [
+            [
+                "*",
+                "Vendor/Module1"
+            ]
+        ]
+    }
+}

@@ -1,0 +1,22 @@
+<?php
+// server url
+//$api_url = 'http://jsonplaceholder.typicode.com/posts?_limit=12';
+$api_url = 'http://www.bbc.co.uk/radio1/playlist.json';
+$headers = array('Content-Type:application/json');
+
+$result = $block->CallAPI('GET', $api_url, $headers, $data = false);
+$result = $result->playlist->a;
+?>
+<div class="container images">
+    <h3 class="col-sm-12 marbot20">Rest API Example:</h3>
+    <?php $count = 0; foreach($result as $res) { if($count%4==0) { echo '<div class="clearfix"></div>'; } ?>
+        <div class="col-sm-3 image">
+            <?php echo '<img class="img-responsive" src="'.$res->image.'">'; ?>
+            <div class="image-description">
+                <h4><a href=""><?php echo substr($res->title, 0, 15); ?></a></h4>
+                <h5>Artist: <?php echo $res->artist; ?></h5>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            </div>
+        </div>
+    <?php $count++; } ?>
+</div>

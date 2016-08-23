@@ -14,7 +14,7 @@
                         <argument name="css_class" xsi:type="string">header links</argument>
                     </arguments>
                 </block>
-                <block class="Magento\Framework\View\Element\Template" name="top.search" as="topSearch" template="Magento_Search::form.mini.phtml" />
+                <!--<block class="Magento\Framework\View\Element\Template" name="top.search" as="topSearch" template="Magento_Search::form.mini.phtml" />-->
 
             </container>
             <referenceBlock name="logo">
@@ -25,8 +25,8 @@
             </referenceBlock>
         </referenceContainer>
         <referenceContainer name="footer" remove="false"/>
-        <referenceBlock name="report.bugs" remove="true"/>
-        <referenceBlock name="catalog.compare.sidebar" remove="true"/>
-        <referenceBlock name="wishlist_sidebar" remove="true"/>
+        <!--<referenceBlock name="report.bugs" remove="true"/>-->
+        <!--<referenceBlock name="catalog.compare.sidebar" remove="true"/>-->
+        <!--<referenceBlock name="wishlist_sidebar" remove="true"/>-->
     </body>
 </page>
