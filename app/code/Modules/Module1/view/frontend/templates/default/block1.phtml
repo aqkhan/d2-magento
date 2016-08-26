@@ -5,8 +5,68 @@
  * @var $block ModulesModule1Block1
  */
 ?>
-<?php //var_dump($block->getCategory());
-?>
-<?php if($block->getBlockEnable() == true) { ?>
-<h1><?php echo $block->getBlockLabel(); ?></h1>
-<?php } ?>
+<div class="container">
+    <?php $data = $block->getModuleData(); ?>
+    <div class="col-sm-12">
+        <div class="page-header">
+            <h2>Module 1 Content</h2>
+        </div>
+        <h3><?php echo $data['title']; ?></h3>
+        <?php echo $data['content']; ?>
+    </div>
+    <?php
+    $skus = $block->getBestDeals();
+    $skus = explode(',', $skus['sku']);
+
+    foreach($skus as $sku) {
+        $product = $block->getProductBySku($sku);
+        $attr = $product->getData();
+        $producImageUrl = $block->getUrl('pub/media/catalog').'product'.$product->getImage();
+        $productUrl = $block->getUrl().$attr['url_key'].'.html';
+        $postDataHelper = $this->helper('Magento\Framework\Data\Helper\PostHelper');
+        $postData = $postDataHelper->getPostData($block->getUrl('checkout/cart', ['_secure' => true]), ['product' => $product->getEntityId()]);
+        $productName = $attr['name'];
+        $productPrice = $attr['price'];
+        $desc = $attr['description'];
+        ?>
+        <div class="product col-sm-3">
+            <li class="product-item">
+                <div class="product-item-info">
+                    <a href="#" class="product-item-photo">
+                    <span class="product-image-container" style="width:240px;">
+                        <span class="product-image-wrapper" style="padding-bottom: 70%;">
+                            <img class="product-image-photo" src="<?php echo $producImageUrl;?>" width="240" height="300" alt="Test Product">
+                        </span>
+                    </span>
+                    </a>
+                    <div class="product-item-details">
+                        <strong class="product-item-name">
+                            <a title="Test Product" href="<?php echo $productUrl;?>" class="product-item-link">
+                                <?php echo $productName;?>
+                            </a>
+                        </strong>
+                        <div class="price-box price-final_price" data-role="priceBox" data-product-id="1">
+                        <span class="price-container price-final_price tax weee">
+                            <span id="old-price-1-widget-product-grid" data-price-amount="55" data-price-type="finalPrice" class="price-wrapper ">
+                                <span class="price">$<?php echo $productPrice;?></span>
+                            </span>
+                        </span>
+                        </div>
+                        <div class="description">
+                            <div class="product-desc">
+                                <p><?php echo substr($desc, 0, 120);?></p>
+                            </div>
+                        </div>
+                        <div class="product-item-actions">
+                            <div class="actions-primary">
+                                <button class="action tocart primary" onclick="setLocation('<?php echo $postData; ?>')" type="button" title="Add to Cart">
+                                    <span>Add to Cart</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </div>
+    <?php } ?>
+</div>
